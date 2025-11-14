@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preptable - Your Recipes. All in One Place. Finally.</title>
+    <meta
+      name="description"
+      content="Save recipes from any cooking website. Add your own. Plan meals. Generate shopping lists. Launching January 5, 2026."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="./fontawesome/css/brands.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #CC3F4F;
+        --primary-dark: #7C1D21;
+        --secondary: #E6A0BA;
+        --secondary-dark: #e0728d;
+        --accent: #D2EEF2;
+        --text-dark: #2d3748;
+        --text-light: #4a5568;
+        --bg-light: #f7fafc;
+        --white: #ffffff;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        color: var(--text-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Manrope", sans-serif;
+        font-weight: 600;
+      }
+
+      /* Hero Section */
+      .hero {
+        /* background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%); */
+        background-color: #f7fafc;
+        color: var(--text-dark);
+        padding: 80px 20px 100px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        
+           
+      }
+
+      .hero::before {
+        content: "🍽️";
+        position: absolute;
+        font-size: 300px;
+        opacity: 0.05;
+        top: -50px;
+        right: -50px;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        padding: 4%;
+        /* background: var(--secondary-dark); */
+        background: linear-gradient(135deg, var(--secondary) 0%, #D2EEF2 100%);
+        border-radius: 60px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        /* border: 1px solid rgba(255, 255, 255, 0.3); */
+      }
+
+      .logo {
+        font-size: 3rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-family: "DM Sans Display", serif;
+        color: var(--primary-dark);
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .hero .tagline {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        opacity: 0.95;
+        font-weight: 600;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+      }
+
+      .hero .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        opacity: 0.9;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Countdown Timer */
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+        animation: fadeInUp 0.8s ease-out 0.6s both;
+      }
+
+      .countdown-item {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 20px 30px;
+        border-radius: 12px;
+        min-width: 100px;
+        border: 1px solid var(--primary-dark);
+      }
+
+      .countdown-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        display: block;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      .countdown-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Email Form */
+      .email-form {
+        max-width: 500px;
+        margin: 0 auto;
+        animation: fadeInUp 0.8s ease-out 0.8s both;
+      }
+
+      .form-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .email-input {
+        flex: 1;
+        padding: 18px 24px;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-family: "Manrope", sans-serif;
+        outline: none;
+        transition: transform 0.2s;
+      }
+
+      .email-input:focus {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+      }
+
+      .submit-btn {
+        background: var(--primary-dark);
+        color: var(--white);
+        border: none;
+        padding: 18px 40px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: poDM Serif Display;
+        transition: all 0.3s;
+        font-family: "DM Sans", sans-serif;
+        white-space: nowrap;
+      }
+
+      .submit-btn:hover {
+        background: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        color: var(--primary-dark);
+      }
+
+      .form-note {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      .founding-badge {
+        background: var(--accent);
+        color: var(--text-dark);
+        padding: 15px 20px;
+        border-radius: 20px;
+        display: inline-block;
+        font-weight: 600;
+        margin-top: 15px;
+        font-size: 0.95rem;
+      }
+
+      /* Problem Section */
+      .problem {
+        padding: 80px 20px;
+        background: var(--bg-light);
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--text-light);
+        margin-bottom: 50px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .problem-card {
+        background: var(--white);
+        padding: 30px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .problem-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .problem-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      .problem-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: var(--text-dark);
+      }
+
+      .problem-card p {
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 80px 20px;
+        background: var(--white);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        text-align: center;
+      }
+      .feature-card img{
+        border-radius: 15px;
+        border: 1px solid var(--accent);
+        margin-bottom: 25px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        margin: 0 auto 20px;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: var(--text-dark);
+      }
+
+      .feature-card p {
+        color: var(--text-light);
+        line-height: 1.8;
+        font-size: 1.05rem;
+      }
+
+      /* Social Proof */
+      .social-proof {
+        padding: 80px 20px;
+        background: var(--secondary);
+      }
+      .social-proof-ctn{
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+        
+      }
+      .social-proof-items{
+        display: flex;
+        align-items: center;
+      }
+
+      .quote-card {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--white);
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        position: relative;
+      }
+
+      .quote-mark {
+        font-size: 4rem;
+        color: var(--primary);
+        opacity: 0.2;
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        font-family: Georgia, serif;
+      }
+
+      .quote-text {
+        font-size: 1.5rem;
+        font-style: italic;
+        color: var(--text-dark);
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .quote-author {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .quote-role {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      /* Founder Section */
+      .founder {
+        padding: 80px 20px;
+        background: var(--white);
+      }
+
+      .founder-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .founder-story {
+        font-size: 1.15rem;
+        color: var(--text-dark);
+        line-height: 1.8;
+        margin-bottom: 30px;
+      }
+
+      .founder-story strong {
+        color: var(--text-dark);
+      }
+
+      /* CTA Section */
+      .cta {
+        padding: 100px 20px;
+        background: linear-gradient(135deg, var(--primary) 0%, #e0728d 100%);
+        color: var(--text-dark);
+        text-align: center;
+      }
+
+      .cta h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .cta p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        opacity: 0.95;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        margin-top: 50px;
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        display: block;
+        margin-bottom: 5px;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--text-dark);
+        color: var(--white);
+        padding: 40px 20px;
+        text-align: center;
+      }
+      footer .container{
+        background: var(--text-dark);
+        border: 1px solid var(--accent);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .social-link {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: all 0.3s;
+      }
+
+      .social-link:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-text {
+        opacity: 0.7;
+        margin-top: 20px;
+      }
+
+      /* Success Message */
+      .success-message {
+        display: none;
+        background: var(--secondary);
+        color: var(--white);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-weight: 600;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero .tagline {
+          font-size: 1.2rem;
+        }
+
+        .hero .subtitle {
+          font-size: 1rem;
+        }
+
+        .countdown {
+          gap: 15px;
+        }
+
+        .countdown-item {
+          padding: 15px 20px;
+          min-width: 80px;
+        }
+
+        .countdown-number {
+          font-size: 1.8rem;
+        }
+
+        .countdown-label {
+          font-size: 0.75rem;
+        }
+
+        .form-group {
+          flex-direction: column;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .quote-card {
+          padding: 30px;
+        }
+
+        .quote-text {
+          font-size: 1.2rem;
+        }
+
+        .stats {
+          gap: 30px;
+        }
+
+        .stat-number {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="logo">Preptable</div>
+        <h1>Your recipes. All in one place. Finally.</h1>
+        <p class="tagline">
+          Start 2026 Organised: Save Money, Waste Less, Stress Less
+        </p>
+        <p class="subtitle">
+          Save recipes from any website, blog. Add your own. Plan meals.
+          Generate shopping lists.
+        </p>
+
+        <!-- Countdown Timer -->
+        <div class="countdown" id="countdown">
+          <div class="countdown-item">
+            <span class="countdown-number" id="days">--</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="hours">--</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="minutes">--</span>
+            <span class="countdown-label">Minutes</span>
+          </div>
+        </div>
+
+        <!-- Email Signup Form -->
+        <form
+          name="waitlist"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="email-form"
+          id="waitlist-form"
+        >
+          <input type="hidden" name="form-name" value="waitlist" />
+          <p style="display: none">
+            <label
+              >Don't fill this out if you're human: <input name="bot-field"
+            /></label>
+          </p>
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              class="email-input"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit" class="submit-btn">Join Waitlist</button>
+          </div>
+          <p class="form-note">
+            Be the first to know when we launch. No spam, ever.
+          </p>
+          <div class="founding-badge">
+            🎉 First 100 members get Founding Pricing (£3.99/month forever)
+          </div>
+          <div class="success-message" id="success-message">
+            ✓ You're on the list! Check your email for confirmation.
+          </div>
+        </form>
+      </div>
+    </section>
+
+
+    <!-- Problem Section -->
+    <section class="problem">
+      <div class="container">
+        <h2 class="section-title">Tired of Recipe Chaos?</h2>
+        <p class="section-subtitle">
+          You're not alone. UK families waste £800 per year on food because meal
+          planning is broken.
+        </p>
+
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-icon">📱</div>
+            <h3>Scattered Everywhere</h3>
+            <p>
+              Browser bookmarks, recipe apps, handwritten notes, screenshots...
+              Finding that one recipe is impossible.
+            </p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">🤔</div>
+            <h3>Decision Fatigue</h3>
+            <p>
+              5pm hits and you're staring at the fridge: "What's for dinner?"
+              Every. Single. Day.
+            </p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">🗑️</div>
+            <h3>Food Waste</h3>
+            <p>
+              Buying ingredients without a plan. Half get used, half go bad.
+              Money down the drain.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">How Preptable Works</h2>
+        <p class="section-subtitle">Three simple steps to organised meals</p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Save from Anywhere</h3>
+            <p>
+              Paste a URL from any recipe blog or cooking website. We extract
+              ingredients and instructions instantly. Or add your own recipes
+              manually.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🗓️</div>
+            <h3>Plan Your Week</h3>
+            <p>
+              Drag and drop recipes into your weekly calendar. See your whole
+              week at a glance. Adjust as needed.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛒</div>
+            <h3>Generate Lists</h3>
+            <p>
+              Auto-generate categorised shopping lists from your meal plan.
+              Print, export, or send to Tesco/Sainsbury's.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+      <h2 class="section-title">Backed by Belief</h2>
+      <div class="social-proof-ctn">
+        <div class="social-proof-items">
+          <div class="feature-grid">
+            <div class="feature-card">
+              <img src="./images/simon-ary.png"/>
+            </div>
+          </div>
+          
+          <div class="quote-card">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">
+              This could save lives. You just have to start.
+            </p>
+            <p class="quote-author">Simon Squibb</p>
+            <p class="quote-role">Entrepreneur & Investor • 2M+ followers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founder Story -->
+    <section class="founder">
+      <div class="container">
+        <h2 class="section-title">Built by Someone Who Gets It</h2>
+        <div class="founder-content">
+          <p class="founder-story">
+            Hi, I'm Ary the
+            <strong>founder of Preptable based in St. Albans</strong>. I built
+            Preptable because I was tired of the recipe chaos. I use my skills to build a solution.
+          </p>
+          <p class="founder-story">
+            When <strong>Simon Squibb</strong> told me my idea could make a
+            difference, I stopped overthinking and started building. Now, with
+            Preptable launching in January 2026, I'm inviting you to be part of
+            the journey.
+          </p>
+          <p class="founder-story">
+            This isn't just another app. It's a tool built by someone who
+            understands the daily stress of "what's for dinner?"
+            <strong>Let's solve this together.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta">
+      <div class="container">
+        <h2>Ready to Start 2026 Organised?</h2>
+        <p>
+          Join hundreds of UK families preparing for a stress-free year of meal
+          planning.
+        </p>
+
+        <form
+          name="waitlist-footer"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="email-form"
+        >
+          <input type="hidden" name="form-name" value="waitlist-footer" />
+          <p style="display: none">
+            <label
+              >Don't fill this out if you're human: <input name="bot-field"
+            /></label>
+          </p>
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              class="email-input"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit" class="submit-btn">Join Waitlist</button>
+          </div>
+          <div class="founding-badge">
+            🎉 Founding Member Pricing: £3.99/month forever (First 100 only)
+          </div>
+        </form>
+
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">£800</span>
+            <span class="stat-label">Saved per family yearly</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">2 min</span>
+            <span class="stat-label">To plan your week</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">Jan 5</span>
+            <span class="stat-label">2026 Launch</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="social-links">
+          <a
+            href="https://instagram.com/preptableapp"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            ><i class="fa-brands fa-instagram"></i></a
+          >
+          <a
+            href="https://tiktok.com/@preptableapp"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            ><i class="fa-brands fa-tiktok"></i></a
+          >
+          <a
+            href="https://twitter.com/preptableapp"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            ><i class="fa-brands fa-x-twitter"></i></a
+          >
+        </div>
+        <p>hello@preptable.app</p>
+        <p class="footer-text">
+          Made with ❤️ in St. Albans, UK 🇬🇧 by a French founder 🇫🇷
+        </p>
+        <p class="footer-text">© 2025 Preptable. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Countdown Timer
+      function updateCountdown() {
+        const launchDate = new Date("2026-01-05T09:30:00").getTime();
+        const now = new Date().getTime();
+        const distance = launchDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+
+        if (distance < 0) {
+          document.getElementById("countdown").innerHTML =
+            "<h2>🎉 We're Live! 🎉</h2>";
+        }
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 60000); // Update every minute
+
+      // Form submission handling
+      const form = document.getElementById("waitlist-form");
+      form.addEventListener("submit", function (e) {
+        // Netlify handles the actual submission
+        // Just show success message
+        setTimeout(() => {
+          document.getElementById("success-message").style.display = "block";
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
