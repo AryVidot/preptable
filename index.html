@@ -91,7 +91,7 @@
         }
       }
 
-      .container {
+      .container, .social-proof {
         max-width: 1400px;
         margin: 0 auto;
         position: relative;
@@ -108,11 +108,16 @@
       }
 
       .logo {
-        font-size: 3rem;
+        margin: 0 auto;
+        padding: 6% 6% 2%;
+      }
+
+      .logo h1{
+        font-size: 4rem;
         font-weight: 800;
-        margin-bottom: 20px;
         font-family: "Fraunces", serif;
         color: var(--primary-dark);
+        text-align: center;
       }
 
       .hero h1 {
@@ -370,9 +375,9 @@
 
       /* Social Proof */
       .social-proof {
-        padding: 80px 20px;
+        /* padding: 80px 20px; */
         padding: 5%;
-        background: var(--secondary);
+        /* background: var(--secondary); */
       }
       .social-proof-ctn{
         max-width: 1400px;
@@ -610,9 +615,13 @@
   </head>
   <body>
     <!-- Hero Section -->
+     <section class="logo">  
+      <div>
+        <h1>Preptable</h1>
+      </div>
+    </section>
     <section class="hero">
       <div class="container">
-        <div class="logo">Preptable</div>
         <h1>Your recipes. All in one place. Finally.</h1>
         <p class="tagline">
           Start 2026 Organised: Save Money, Waste Less, Stress Less
