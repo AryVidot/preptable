@@ -2,14 +2,19 @@
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RD2QRXP99T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-RD2QRXP99T"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  gtag('config', 'G-RD2QRXP99T');
-</script>
+      gtag("config", "G-RD2QRXP99T");
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Preptable - Your Recipes. All in One Place. Finally.</title>
@@ -20,609 +25,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="./fontawesome/css/brands.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary: #CC3F4F;
-        --primary-dark: #7C1D21;
-        --secondary: #E6A0BA;
-        --secondary-dark: #e0728d;
-        --accent: #D2EEF2;
-        --text-dark: #2d3748;
-        --text-light: #4a5568;
-        --bg-light: #f7fafc;
-        --white: #ffffff;
-      }
-
-      body {
-        font-family: "Manrope", sans-serif;
-        color: var(--text-dark);
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
-
-      h1,
-      h2,
-      h3 {
-        font-family: "Manrope", sans-serif;
-        font-weight: 600;
-      }
-
-      /* Hero Section */
-      .hero {
-        /* background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%); */
-        /* background-color: #f7fafc; */
-        background-color: var(--white);
-        color: var(--text-dark);
-        /* padding: 80px 20px 100px; */
-        padding: 5%;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        
-           
-      }
-
-      .hero::before {
-        content: "🍽️";
-        position: absolute;
-        font-size: 300px;
-        opacity: 0.05;
-        top: -50px;
-        right: -50px;
-        animation: float 6s ease-in-out infinite;
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
-      }
-
-      .container, .social-proof {
-        max-width: 1400px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-        /* padding: 4%; */
-        padding: 5% 6% 8%;
-        /* background: var(--secondary-dark); */
-        background: linear-gradient(135deg, var(--secondary) 0%, #D2EEF2 100%);
-        border-radius: 60px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        /* border: 1px solid rgba(255, 255, 255, 0.3); */
-      }
-
-      .logo {
-        margin: 0 auto;
-        padding: 6% 6% 2%;
-      }
-
-      .logo h1{
-        font-size: 4rem;
-        font-weight: 800;
-        font-family: "Fraunces", serif;
-        color: var(--primary-dark);
-        text-align: center;
-      }
-
-      .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 20px;
-        line-height: 1.2;
-        animation: fadeInUp 0.8s ease-out;
-      }
-
-      .hero .tagline {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-        opacity: 0.95;
-        font-weight: 600;
-        animation: fadeInUp 0.8s ease-out 0.2s both;
-      }
-
-      .hero .subtitle {
-        font-size: 1.2rem;
-        margin-bottom: 40px;
-        opacity: 0.9;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-        animation: fadeInUp 0.8s ease-out 0.4s both;
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Countdown Timer */
-      .countdown {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-bottom: 40px;
-        animation: fadeInUp 0.8s ease-out 0.6s both;
-      }
-
-      .countdown-item {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        padding: 20px 30px;
-        border-radius: 12px;
-        min-width: 100px;
-        border: 1px solid var(--primary-dark);
-      }
-
-      .countdown-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        display: block;
-        font-family: "DM Sans", sans-serif;
-      }
-
-      .countdown-label {
-        font-size: 0.9rem;
-        opacity: 0.9;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      /* Email Form */
-      .email-form {
-        max-width: 500px;
-        margin: 0 auto;
-        animation: fadeInUp 0.8s ease-out 0.8s both;
-      }
-
-      .form-group {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 15px;
-      }
-
-      .email-input {
-        flex: 1;
-        padding: 18px 24px;
-        border: none;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-family: "Manrope", sans-serif;
-        outline: none;
-        transition: transform 0.2s;
-      }
-
-      .email-input:focus {
-        transform: scale(1.02);
-        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
-      }
-
-      .submit-btn {
-        background: var(--primary-dark);
-        color: var(--white);
-        border: none;
-        padding: 18px 40px;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: poDM Serif Display;
-        transition: all 0.3s;
-        font-family: "DM Sans", sans-serif;
-        white-space: nowrap;
-      }
-
-      .submit-btn:hover {
-        background: var(--accent);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        color: var(--primary-dark);
-      }
-
-      .form-note {
-        font-size: 0.9rem;
-        opacity: 0.9;
-      }
-
-      .founding-badge {
-        background: var(--accent);
-        color: var(--text-dark);
-        padding: 15px 20px;
-        border-radius: 12px;
-        display: inline-block;
-        font-weight: 600;
-        margin-top: 15px;
-        font-size: 0.95rem;
-      }
-
-      /* Problem Section */
-      .problem {
-        /* padding: 80px 20px; */
-        padding: 5%;
-        /* background: var(--bg-light); */
-        background-color: var(--white);
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        color: var(--text-dark);
-      }
-
-      .section-subtitle {
-        text-align: center;
-        font-size: 1.2rem;
-        color: var(--text-light);
-        margin-bottom: 50px;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .problem-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        max-width: 900px;
-        margin: 0 auto;
-      }
-
-      .problem-card {
-        background: var(--white);
-        padding: 30px;
-        border-radius: 12px;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-
-      .problem-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .problem-icon {
-        font-size: 3rem;
-        margin-bottom: 15px;
-      }
-
-      .problem-card h3 {
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-        color: var(--text-dark);
-      }
-
-      .problem-card p {
-        color: var(--text-light);
-        line-height: 1.6;
-      }
-
-      /* Features Section */
-      .features {
-        /* padding: 80px 20px; */
-        padding: 5%;
-        background: var(--white);
-      }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      .feature-card {
-        text-align: center;
-      }
-      .feature-card img{
-        border-radius: 12px;
-        border: 1px solid var(--accent);
-        margin-bottom: 25px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-        max-width: 100%;
-        width: 100%;
-      }
-
-      .feature-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(
-          135deg,
-          var(--primary),
-          var(--primary-dark)
-        );
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        margin: 0 auto 20px;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-      }
-
-      .feature-card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-        color: var(--text-dark);
-      }
-
-      .feature-card p {
-        color: var(--text-light);
-        line-height: 1.8;
-        font-size: 1.05rem;
-      }
-
-      /* Social Proof */
-      .social-proof {
-        /* padding: 80px 20px; */
-        padding: 5%;
-        /* background: var(--secondary); */
-      }
-      .social-proof-ctn{
-        max-width: 1400px;
-        margin: 0 auto;
-        position: relative;
-        
-      }
-      .social-proof-items{
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .quote-card {
-        max-width: 800px;
-        margin: 0 auto;
-        background: var(--white);
-        padding: 50px;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-        position: relative;
-      }
-
-      .quote-mark {
-        font-size: 4rem;
-        color: var(--primary);
-        opacity: 0.2;
-        position: absolute;
-        top: 20px;
-        left: 30px;
-        font-family: Georgia, serif;
-      }
-
-      .quote-text {
-        font-size: 1.5rem;
-        font-style: italic;
-        color: var(--text-dark);
-        margin-bottom: 25px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .quote-author {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--primary);
-      }
-
-      .quote-role {
-        color: var(--text-light);
-        font-size: 0.95rem;
-      }
-
-      /* Founder Section */
-      .founder {
-        /* padding: 80px 20px; */
-        padding: 5%;
-        background: var(--white);
-      }
-
-      .founder-content {
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .founder-story {
-        font-size: 1.15rem;
-        color: var(--text-dark);
-        line-height: 1.8;
-        margin-bottom: 30px;
-      }
-
-      .founder-story strong {
-        color: var(--text-dark);
-      }
-
-      /* CTA Section */
-      .cta {
-        padding: 100px 20px;
-        padding: 6% 5%;
-        background: linear-gradient(135deg, var(--primary) 0%, #e0728d 100%);
-        color: var(--text-dark);
-        text-align: center;
-      }
-
-      .cta h2 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-      }
-
-      .cta p {
-        font-size: 1.2rem;
-        margin-bottom: 40px;
-        opacity: 0.95;
-      }
-
-      .stats {
-        display: flex;
-        justify-content: center;
-        gap: 60px;
-        margin-top: 50px;
-        flex-wrap: wrap;
-      }
-
-      .stat-item {
-        text-align: center;
-      }
-
-      .stat-number {
-        font-size: 3rem;
-        font-weight: 800;
-        display: block;
-        margin-bottom: 5px;
-        font-family: "DM Sans", sans-serif;
-      }
-
-      .stat-label {
-        font-size: 1rem;
-        opacity: 0.9;
-      }
-
-      /* Footer */
-      .footer {
-        background: var(--text-dark);
-        color: var(--white);
-        /* padding: 40px 20px; */
-        padding: 6% 5%;
-        text-align: center;
-      }
-      footer .container{
-        background: var(--text-dark);
-        border: 1px solid var(--accent);
-        padding: 5%;
-      }
-
-      .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 20px;
-      }
-
-      .social-link {
-        width: 50px;
-        height: 50px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        text-decoration: none;
-        font-size: 1.5rem;
-        transition: all 0.3s;
-      }
-
-      .social-link:hover {
-        background: var(--primary);
-        transform: translateY(-3px);
-      }
-
-      .footer-text {
-        opacity: 0.7;
-        margin-top: 20px;
-      }
-
-      /* Success Message */
-      .success-message {
-        display: none;
-        background: var(--secondary);
-        color: var(--white);
-        padding: 15px;
-        border-radius: 12px;
-        margin-top: 15px;
-        font-weight: 600;
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2rem;
-        }
-
-        .hero .tagline {
-          font-size: 1.2rem;
-        }
-
-        .hero .subtitle {
-          font-size: 1rem;
-        }
-
-        .countdown {
-          gap: 15px;
-        }
-
-        .countdown-item {
-          padding: 15px 20px;
-          min-width: 80px;
-        }
-
-        .countdown-number {
-          font-size: 1.8rem;
-        }
-
-        .countdown-label {
-          font-size: 0.75rem;
-        }
-
-        .form-group {
-          flex-direction: column;
-        }
-
-        .section-title {
-          font-size: 1.8rem;
-        }
-
-        .quote-card {
-          padding: 30px;
-        }
-
-        .quote-text {
-          font-size: 1.2rem;
-        }
-
-        .stats {
-          gap: 30px;
-        }
-
-        .stat-number {
-          font-size: 2rem;
-        }
-      }
-    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="./fontawesome/css/brands.min.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="scroll-watcher"></div>
     <!-- Hero Section -->
-     <section class="logo">  
+    <section class="logo">
       <div>
         <h1>Preptable</h1>
+        <h2>Your recipes. All in one place. Finally.</h2>
       </div>
     </section>
+    <!-- <div class="doughnut"></div> -->
+
     <section class="hero">
       <div class="container">
-        <h1>Your recipes. All in one place. Finally.</h1>
+        <!-- <h1>Your recipes. All in one place. Finally.</h1> -->
         <p class="tagline">
           Start 2026 Organised: Save Money, Waste Less, Stress Less
         </p>
@@ -646,7 +70,7 @@
             <span class="countdown-label">Minutes</span>
           </div>
         </div>
-
+        <!-- <div class="circle-blue"></div> -->
         <!-- Email Signup Form -->
         <form
           name="waitlist"
@@ -662,6 +86,18 @@
               >Don't fill this out if you're human: <input name="bot-field"
             /></label>
           </p>
+          <!-- Name Field -->
+          <div class="form-group">
+            <input
+              type="text"
+              name="name"
+              class="email-input"
+              placeholder="Your name"
+              required
+            />
+          </div>
+
+          <!-- Email Field -->
           <div class="form-group">
             <input
               type="email"
@@ -685,12 +121,11 @@
       </div>
     </section>
 
-
     <!-- Problem Section -->
     <section class="problem">
       <div class="container">
         <h2 class="section-title">Tired of Recipe Chaos?</h2>
-        <p class="section-subtitle">
+        <p class="subtitle">
           You're not alone. UK families waste £800 per year on food because meal
           planning is broken.
         </p>
@@ -728,7 +163,7 @@
     <section class="features">
       <div class="container">
         <h2 class="section-title">How Preptable Works</h2>
-        <p class="section-subtitle">Three simple steps to organised meals</p>
+        <p class="subtitle">Three simple steps to organised meals</p>
 
         <div class="features-grid">
           <div class="feature-card">
@@ -753,7 +188,7 @@
             <h3>Generate Lists</h3>
             <p>
               Auto-generate categorised shopping lists from your meal plan.
-              Print, export, or send to Tesco/Sainsbury's.
+              Print, export, or send to your supermarket*.
             </p>
           </div>
         </div>
@@ -762,22 +197,22 @@
 
     <!-- Social Proof -->
     <section class="social-proof">
-      <h2 class="section-title">Backed by Belief</h2>
-      <div class="social-proof-ctn">
-        <div class="social-proof-items">
-          <div class="feature-grid">
-            <div class="feature-card">
-              <img src="./images/simon-ary.png"/>
+      <div class="container">
+        <h2 class="section-title">Backed by Belief</h2>
+        <div class="social-proof-ctn">
+          <div class="social-proof-items">
+            <div class="social-proof-card">
+              <img src="./images/simon-ary.png" />
             </div>
-          </div>
-          
-          <div class="quote-card">
-            <div class="quote-mark">"</div>
-            <p class="quote-text">
-              This could save lives. You just have to start.
-            </p>
-            <p class="quote-author">Simon Squibb</p>
-            <p class="quote-role">Entrepreneur & Investor • 2M+ followers</p>
+
+            <div class="quote-card">
+              <div class="quote-mark">"</div>
+              <p class="quote-text">
+                This could save lives. You just have to start.
+              </p>
+              <p class="quote-author">Simon Squibb</p>
+              <p class="quote-role">Entrepreneur & Investor • 2M+ followers</p>
+            </div>
           </div>
         </div>
       </div>
@@ -791,7 +226,8 @@
           <p class="founder-story">
             Hi, I'm Ary the
             <strong>founder of Preptable based in St. Albans</strong>. I built
-            Preptable because I was tired of the recipe chaos. I use my skills to build a solution.
+            Preptable because I was tired of the recipe chaos. I use my skills
+            to build a solution.
           </p>
           <p class="founder-story">
             When <strong>Simon Squibb</strong> told me my idea could make a
@@ -811,7 +247,7 @@
     <!-- Final CTA -->
     <section class="cta">
       <div class="container">
-        <h2>Ready to Start 2026 Organised?</h2>
+        <h2 class="section-title">Ready to Start 2026 Organised?</h2>
         <p>
           Join hundreds of UK families preparing for a stress-free year of meal
           planning.
@@ -830,6 +266,18 @@
               >Don't fill this out if you're human: <input name="bot-field"
             /></label>
           </p>
+          <!-- Name Field -->
+          <div class="form-group">
+            <input
+              type="text"
+              name="name"
+              class="email-input"
+              placeholder="Your name"
+              required
+            />
+          </div>
+
+          <!-- Email Field -->
           <div class="form-group">
             <input
               type="email"
@@ -871,26 +319,27 @@
             class="social-link"
             target="_blank"
             rel="noopener"
-            ><i class="fa-brands fa-instagram"></i></a
-          >
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
           <a
             href="https://tiktok.com/@preptableapp"
             class="social-link"
             target="_blank"
             rel="noopener"
-            ><i class="fa-brands fa-tiktok"></i></a
-          >
+            ><i class="fa-brands fa-tiktok"></i
+          ></a>
           <a
             href="https://twitter.com/preptableapp"
             class="social-link"
             target="_blank"
             rel="noopener"
-            ><i class="fa-brands fa-x-twitter"></i></a
-          >
+            ><i class="fa-brands fa-x-twitter"></i
+          ></a>
         </div>
         <p>hello@preptable.app</p>
         <p class="footer-text">
-          Made with ❤️ in St. Albans, UK 🇬🇧 by a French founder 🇫🇷
+          Made in St. Albans, UK <br />
+          <!-- <span>by a French founder 🇫🇷</span> -->
         </p>
         <p class="footer-text">© 2025 Preptable. All rights reserved.</p>
       </div>
