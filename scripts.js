@@ -99,3 +99,25 @@ document.addEventListener("keydown", (e) => {
 });
 
 
+
+const openModal = (e) => {
+  e.preventDefault();
+  modal.classList.add("open");
+  // Prevent background scroll but allow modal scroll
+  document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
+};
+
+const closeModal = () => {
+  modal.classList.remove("open");
+  // Restore scroll
+  document.body.style.overflow = "";
+  document.body.style.position = "";
+  document.body.style.width = "";
+  form.reset();
+  form.style.display = "block";
+  successMessage.style.display = "none";
+};
+
+
