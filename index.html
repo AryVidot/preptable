@@ -17,303 +17,893 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Preptable - Your Recipes. All in One Place. Finally.</title>
-    <meta
-      name="description"
-      content="Save recipes from any cooking website. Add your own. Plan meals. Generate shopping lists. Launching January 5, 2026."
-    />
+    <title>Preptable | Meal Planning for Busy Families</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Manrope:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="./fontawesome/css/brands.min.css" />
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- Tailwind Configuration with Custom Colors and Fonts -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "strawberry-red": "#FB4141",
+              "blueberry-blue": "#85E3FF",
+              "banana-yellow": "#FFE100",
+              "garden-green": "#78C841",
+            },
+            fontFamily: {
+              chelsea: ['"Chelsea Market"', "cursive"],
+              manrope: ["Manrope", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
-    <div class="scroll-watcher"></div>
-    <!-- Hero Section -->
-    <section class="logo">
-      <div>
-        <h1>Preptable</h1>
-        <h2>Your recipes. All in one place. Finally.</h2>
-      </div>
-    </section>
-    <!-- <div class="doughnut"></div> -->
 
-    <section class="hero">
-      <div class="container">
-        <!-- <h1>Your recipes. All in one place. Finally.</h1> -->
-        <p class="tagline">
-          Start 2026 Organised: Save Money, Waste Less, Stress Less
-        </p>
-        <p class="subtitle">
-          Save recipes from any website, blog. Add your own. Plan meals.
-          Generate shopping lists.
-        </p>
+  <body class="min-h-screen bg-gray-50 antialiased">
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm soft-shadow">
+      <div class="max-w-7xl mx-auto px-4 sm::px-6">
+        <!-- The main header flex container -->
+        <div class="flex justify-between items-center h-20 space-x-2">
+          <!-- Logo/Branding  (Left) -->
+          <div class="flex-shrink-0 flex items-center">
+            <svg
+              class="w-8 h-8 text-strawberry-red"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 15v-4H8l4.5-8V7h3l-4.5 8v2h-2z"
+              />
+            </svg>
+            <a href="#" class="title-font text-2xl font-bold text-gray-800"
+              >Preptable</a
+            >
+          </div>
 
-        <!-- Countdown Timer -->
-        <div class="countdown" id="countdown">
-          <div class="countdown-item">
-            <span class="countdown-number" id="days">--</span>
-            <span class="countdown-label">Days</span>
+          <!-- Desktop Menu Links (Centered, Hidden on small screens) -->
+          <!-- flex-grow pushes this nav to take up all available space, and justify-center centers its contents -->
+          <nav
+            class="hidden md:flex space-x-6 text-gray-600 font-semibold items-center flex-grow justify-center space-x-8 text-lg"
+          >
+            <a href="#how-it-works" class="hover:text-strawberry-red transition"
+              >How It Works</a
+            >
+            <a href="#problem" class="hover:text-strawberry-red transition"
+              >Why We Exist</a
+            >
+            <a href="#founders" class="hover:text-strawberry-red transition"
+              >Founder</a
+            >
+          </nav>
+
+          <!-- Desktop Button (Right, Hidden on small screens) -->
+          <!-- flex-shrink-0 ensures it stays its fixed size on the right -->
+          <div class="hidden md:block flex-shrink-0">
+            <a
+              href="#"
+              data-modal-target="waitlist-modal"
+              class="px-6 py-2 bg-strawberry-red text-white font-bold rounded-full soft-shadow cta-button hover:bg-red-500 transition duration-150"
+            >
+              Join Waitlist
+            </a>
           </div>
-          <div class="countdown-item">
-            <span class="countdown-number" id="hours">--</span>
-            <span class="countdown-label">Hours</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number" id="minutes">--</span>
-            <span class="countdown-label">Minutes</span>
+
+          <!-- Mobile Menu Button (Stays on the far right on mobile) -->
+          <div class="md:hidden">
+            <button
+              id="menu-button"
+              type="button"
+              class="inline-flex items-center justify-center p-2 rounded-xl text-prep-text hover:text-prep-red focus:outline-none focus:ring-2 focus:ring-inset focus:ring-prep-red transition duration-150"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <!-- Icon when menu is closed (Hamburger) -->
+              <svg
+                id="menu-icon-closed"
+                class="h-8 w-8 block"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              <!-- Icon when menu is open (Close X) -->
+              <svg
+                id="menu-icon-open"
+                class="h-8 w-8 hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
           </div>
         </div>
-        <!-- <div class="circle-blue"></div> -->
-        <!-- Email Signup Form -->
-        <form
-          name="waitlist"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          class="email-form"
-          id="waitlist-form"
-        >
-          <input type="hidden" name="form-name" value="waitlist" />
-          <p style="display: none">
-            <label
-              >Don't fill this out if you're human: <input name="bot-field"
-            /></label>
+      </div>
+
+      <!-- Mobile Menu Panel (Slides out from the right side) -->
+      <div
+        id="mobile-menu"
+        class="mobile-menu fixed inset-y-0 right-0 w-3/4 max-w-sm bg-white z-40 shadow-2xl md:hidden"
+      >
+        <div class="pt-6 pb-3 space-y-2 text-center bg-white h-screen">
+          <a
+            href="#how-it-works"
+            class="block px-4 py-3 text-lg font-medium text-prep-text menu-link hover:text-strawberry-red transition duration-150"
+            >How It Works</a
+          >
+          <a
+            href="#problem"
+            class="block px-4 py-3 text-lg font-medium text-prep-text menu-link hover:text-strawberry-red transition duration-150"
+            >Why We Exist</a
+          >
+          <a
+            href="#founders"
+            class="block px-4 py-3 text-lg font-medium text-prep-text menu-link hover:text-strawberry-red transition duration-150"
+            >Founder</a
+          >
+          <div class="p-4">
+            <a
+              href="#"
+              data-modal-target="waitlist-modal"
+              class="menu-link block w-full px-6 py-3 rounded-full text-white bg-strawberry-red cta-button soft-shadow text-center hover:bg-red-500 font-bold text-lg transition duration-150"
+              >Join Waitlist</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay to close menu when clicking outside (hidden by default) -->
+      <div
+        id="menu-overlay"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+      ></div>
+    </header>
+    <main>
+      <!-- 1. HERO SECTION -->
+      <section class="hero-bg py-20 md:py-32 text-center overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+          <h1
+            class="title-font text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 max-w-4xl mx-auto text-gray-800 leading-tight"
+          >
+            Your recipes. <br />All in one place. Finally.
+          </h1>
+          <p
+            class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-gray-600 font-medium"
+          >
+            The easiest way for busy parents to save recipes from anywhere, plan
+            meals in minutes, and shop without stress.
           </p>
-          <!-- Name Field -->
-          <div class="form-group">
-            <input
-              type="text"
-              name="name"
-              class="email-input"
-              placeholder="Your name"
-              required
-            />
+
+          <!-- CTA Buttons -->
+          <div
+            class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6"
+          >
+            <!-- Updated CTA to trigger the modal via data attribute -->
+            <a
+              id="waitlist"
+              href="#"
+              data-modal-target="waitlist-modal"
+              class="cta-button w-full sm:w-auto px-10 py-4 bg-strawberry-red text-white text-lg font-extrabold rounded-full soft-shadow hover:bg-red-500 transform hover:scale-[1.02] transition duration-300"
+            >
+              Join the Waitlist — Become a Founding Member
+            </a>
+            <a
+              href="#how-it-works"
+              class="w-full sm:w-auto px-10 py-4 bg-white text-gray-800 text-lg font-bold rounded-full soft-shadow hover:bg-gray-100 border border-gray-200 transition duration-300"
+            >
+              See How It Works
+            </a>
           </div>
 
-          <!-- Email Field -->
-          <div class="form-group">
-            <input
-              type="email"
-              name="email"
-              class="email-input"
-              placeholder="Enter your email"
-              required
-            />
-            <button type="submit" class="submit-btn">Join Waitlist</button>
+          <!-- Micro-Badge -->
+          <div
+            class="inline-block px-4 py-2 bg-blueberry-blue/30 text-gray-700 text-sm font-semibold rounded-full mt-4"
+          >
+            “Founding Members get permanent £3.99/month pricing and early
+            access.”
           </div>
-          <p class="form-note">
-            Be the first to know when we launch. No spam, ever.
-          </p>
-          <div class="founding-badge">
-            🎉 First 100 members get Founding Pricing (£3.99/month forever)
-          </div>
-          <div class="success-message" id="success-message">
-            ✓ You're on the list! Check your email for confirmation.
-          </div>
-        </form>
-      </div>
-    </section>
 
-    <!-- Problem Section -->
-    <section class="problem">
-      <div class="container">
-        <h2 class="section-title">Tired of Recipe Chaos?</h2>
-        <p class="subtitle">
-          You're not alone. UK families waste £800 per year on food because meal
-          planning is broken.
-        </p>
-
-        <div class="problem-grid">
-          <div class="problem-card">
-            <div class="problem-icon">📱</div>
-            <h3>Scattered Everywhere</h3>
-            <p>
-              Browser bookmarks, recipe apps, handwritten notes, screenshots...
-              Finding that one recipe is impossible.
-            </p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-icon">🤔</div>
-            <h3>Decision Fatigue</h3>
-            <p>
-              5pm hits and you're staring at the fridge: "What's for dinner?"
-              Every. Single. Day.
-            </p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-icon">🗑️</div>
-            <h3>Food Waste</h3>
-            <p>
-              Buying ingredients without a plan. Half get used, half go bad.
-              Money down the drain.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-      <div class="container">
-        <h2 class="section-title">How Preptable Works</h2>
-        <p class="subtitle">Three simple steps to organised meals</p>
-
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📋</div>
-            <h3>Save from Anywhere</h3>
-            <p>
-              Paste a URL from any recipe blog or cooking website. We extract
-              ingredients and instructions instantly. Or add your own recipes
-              manually.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🗓️</div>
-            <h3>Plan Your Week</h3>
-            <p>
-              Drag and drop recipes into your weekly calendar. See your whole
-              week at a glance. Adjust as needed.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🛒</div>
-            <h3>Generate Lists</h3>
-            <p>
-              Auto-generate categorised shopping lists from your meal plan.
-              Print, export, or send to your supermarket*.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Proof -->
-    <section class="social-proof">
-      <div class="container">
-        <h2 class="section-title">Backed by Belief</h2>
-        <div class="social-proof-ctn">
-          <div class="social-proof-items">
-            <div class="social-proof-card">
-              <img src="./images/simon-ary.png" />
+          <!-- Hero Visual (Abstract Phone Mockup) -->
+          <div class="mt-16 flex justify-center relative">
+            <div
+              class="w-72 h-128 p-1 rounded-[3rem] bg-gray-900 soft-shadow transform -rotate-3 hover:rotate-0 transition duration-500 relative"
+            >
+              <!-- Screen Content: Simplified Meal Plan Grid -->
+              <div class="h-full w-full rounded-[2.8rem] bg-white p-4">
+                <div class="title-font text-xl font-bold text-gray-800 mb-4">
+                  Meal Plan - Jan 20
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="p-3 bg-garden-green/20 rounded-xl text-left">
+                    <span class="text-xs font-semibold text-garden-green"
+                      >Mon</span
+                    >
+                    <p class="text-sm font-bold text-gray-800">Taco Tuesday</p>
+                  </div>
+                  <div class="p-3 bg-banana-yellow/20 rounded-xl text-left">
+                    <span class="text-xs font-semibold text-banana-yellow"
+                      >Tue</span
+                    >
+                    <p class="text-sm font-bold text-gray-800">Pasta Bake</p>
+                  </div>
+                  <div
+                    class="col-span-2 p-3 bg-blueberry-blue/20 rounded-xl text-left"
+                  >
+                    <span class="text-xs font-semibold text-blueberry-blue"
+                      >Shopping List</span
+                    >
+                    <p class="text-sm font-bold text-gray-800">
+                      Auto-sorted & Ready
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-4 text-center text-sm text-gray-500">
+                  ...and 20+ saved recipes
+                </div>
+              </div>
+              <div
+                class="absolute top-4 left-1/2 -translate-x-1/2 w-2 h-1.5 rounded-full bg-gray-700"
+              ></div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div class="quote-card">
-              <div class="quote-mark">"</div>
-              <p class="quote-text">
-                This could save lives. You just have to start.
+      <!-- 2. SOCIAL PROOF SECTION -->
+      <section class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+          <span
+            class="text-sm font-bold text-strawberry-red uppercase tracking-widest block mb-2"
+          >
+            Seen, shared, and loved.
+          </span>
+          <h2
+            class="title-font text-4xl md:text-5xl font-extrabold mb-8 text-gray-800"
+          >
+            When Simon Squibb asked “What’s your dream?”, our answer reached
+            thousands of parents.
+          </h2>
+          <div
+            class="flex justify-center space-x-6 items-center bg-gray-100 p-6 rounded-3xl soft-shadow max-w-lg mx-auto"
+          >
+            <div class="text-center">
+              <p class="title-font text-2xl font-extrabold text-strawberry-red">
+                5,680
               </p>
-              <p class="quote-author">Simon Squibb</p>
-              <p class="quote-role">Entrepreneur & Investor • 2M+ followers</p>
+              <p class="text-sm text-gray-600">likes</p>
+            </div>
+            <div class="text-center">
+              <p class="title-font text-2xl font-extrabold text-blueberry-blue">
+                191
+              </p>
+              <p class="text-sm text-gray-600">comments</p>
+            </div>
+            <div class="text-center">
+              <p class="title-font text-2xl font-extrabold text-garden-green">
+                171
+              </p>
+              <p class="text-sm text-gray-600">shares</p>
+            </div>
+          </div>
+          <p class="text-lg md:text-xl mt-8 text-gray-600">
+            Turns out, families everywhere want mealtime to feel simple again.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3. PROBLEM SECTION — “WHY PREPTABLE EXISTS” -->
+      <section id="problem" class="py-20 bg-banana-yellow/20">
+        <div class="max-w-7xl mx-auto px-4">
+          <h2
+            class="title-font text-4xl md:text-5xl font-extrabold text-center mb-4 text-gray-800"
+          >
+            Family meals shouldn’t feel chaotic.
+          </h2>
+          <p
+            class="text-lg md:text-xl text-center max-w-3xl mx-auto mb-12 text-gray-600"
+          >
+            Parents are tired of juggling screenshots, saved Instagram reels,
+            endless tabs, and last-minute “What do we eat?” panic. Preptable
+            solves the mental load by gathering everything in one calm place.
+          </p>
+
+          <!-- Mini Cards - Now use hover-bounce-card -->
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Card 1: Recipe Chaos -->
+            <div
+              class="hover-bounce-card p-8 bg-white rounded-3xl soft-shadow border-t-8 border-strawberry-red"
+            >
+              <svg
+                class="w-10 h-10 mb-4 text-strawberry-red"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                ></path>
+              </svg>
+              <h3 class="title-font text-2xl font-extrabold mb-3 text-gray-800">
+                Recipe chaos ends here.
+              </h3>
+              <p class="text-gray-600">
+                Save recipes from websites, blogs, Instagram or anywhere online.
+              </p>
+            </div>
+
+            <!-- Card 2: Plan Your Week -->
+            <div
+              class="hover-bounce-card p-8 bg-white rounded-3xl soft-shadow border-t-8 border-blueberry-blue"
+            >
+              <svg
+                class="w-10 h-10 mb-4 text-blueberry-blue"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <h3 class="title-font text-2xl font-extrabold mb-3 text-gray-800">
+                Plan your week in minutes.
+              </h3>
+              <p class="text-gray-600">
+                A simple drag-and-drop weekly planner built for real family
+                life.
+              </p>
+            </div>
+
+            <!-- Card 3: Shop Smarter -->
+            <div
+              class="hover-bounce-card p-8 bg-white rounded-3xl soft-shadow border-t-8 border-garden-green"
+            >
+              <svg
+                class="w-10 h-10 mb-4 text-garden-green"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+              <h3 class="title-font text-2xl font-extrabold mb-3 text-gray-800">
+                Shop smarter, not harder.
+              </h3>
+              <p class="text-gray-600">
+                Automatic shopping lists organised by category — printable,
+                shareable, no more aisle-hopping.
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Founder Story -->
-    <section class="founder">
-      <div class="container">
-        <h2 class="section-title">Built by Someone Who Gets It</h2>
-        <div class="founder-content">
-          <p class="founder-story">
-            Hi, I'm Ary the
-            <strong>founder of Preptable based in St. Albans</strong>. I built
-            Preptable because I was tired of the recipe chaos. I use my skills
-            to build a solution.
+      <!-- 4. THE SOLUTION SECTION — “MEET PREPTABLE” -->
+      <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+          <h2
+            class="title-font text-4xl md:text-5xl font-extrabold text-center mb-4 text-gray-800"
+          >
+            The meal-planning app built for real families.
+          </h2>
+          <p
+            class="text-lg md:text-xl text-center max-w-3xl mx-auto mb-16 text-gray-600"
+          >
+            Everything you need to organise meals without losing your mind at 5
+            p.m.
           </p>
-          <p class="founder-story">
-            When <strong>Simon Squibb</strong> told me my idea could make a
-            difference, I stopped overthinking and started building. Now, with
-            Preptable launching in January 2026, I'm inviting you to be part of
-            the journey.
+
+          <!-- Feature Blocks (Updated with hover-bounce-card class) -->
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+            <!-- Feature 1 -->
+            <div
+              class="hover-bounce-card p-6 bg-blueberry-blue/10 rounded-2xl soft-shadow flex flex-col items-center"
+            >
+              <div
+                class="w-16 h-16 bg-blueberry-blue/70 rounded-full flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="title-font text-xl font-bold mb-2 text-gray-800">
+                Save from anywhere
+              </h3>
+              <p class="text-gray-600">
+                One tap from any site or app. Your recipes finally live
+                together.
+              </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div
+              class="hover-bounce-card p-6 bg-garden-green/10 rounded-2xl soft-shadow flex flex-col items-center"
+            >
+              <div
+                class="w-16 h-16 bg-garden-green/70 rounded-full flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="title-font text-xl font-bold mb-2 text-gray-800">
+                Weekly plan in minutes
+              </h3>
+              <p class="text-gray-600">
+                A beautifully simple calendar that adapts to busy schedules.
+              </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div
+              class="hover-bounce-card p-6 bg-strawberry-red/10 rounded-2xl soft-shadow flex flex-col items-center"
+            >
+              <div
+                class="w-16 h-16 bg-strawberry-red/70 rounded-full flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="title-font text-xl font-bold mb-2 text-gray-800">
+                Automatic shopping lists
+              </h3>
+              <p class="text-gray-600">
+                Instant lists sorted by product category. No thinking required.
+              </p>
+            </div>
+
+            <!-- Feature 4 (Coming Soon) -->
+            <div
+              class="hover-bounce-card p-6 bg-banana-yellow/10 rounded-2xl soft-shadow flex flex-col items-center"
+            >
+              <div
+                class="w-16 h-16 bg-banana-yellow/70 rounded-full flex items-center justify-center mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zM5 3a2 2 0 00-2 2v1c0 1.104.896 2 2 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="title-font text-xl font-bold mb-2 text-gray-800">
+                Future magic
+                <span class="text-sm font-normal text-gray-500"
+                  >(coming soon)</span
+                >
+              </h3>
+              <p class="text-gray-600">
+                Send your grocery list directly to major supermarkets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. FOUNDING MEMBERS SECTION — HIGH CONVERSION -->
+      <!-- Note: The anchor ID is kept here, but the links now trigger the modal -->
+      <section class="py-20 bg-strawberry-red" id="waitlist-form">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+          <h2
+            class="title-font text-4xl md:text-5xl font-extrabold mb-6 text-white"
+          >
+            Become one of the first 100 Founding Members.
+          </h2>
+          <p class="text-xl md:text-2xl mb-8 text-white/90 font-medium">
+            Preptable opens early access soon. The first 100 members get
+            permanent £3.99/month pricing, influence over upcoming features, and
+            the chance to shape how families cook in 2026 and beyond.
           </p>
-          <p class="founder-story">
-            This isn't just another app. It's a tool built by someone who
-            understands the daily stress of "what's for dinner?"
-            <strong>Let's solve this together.</strong>
+          <!-- Updated CTA to trigger the modal via data attribute -->
+          <a
+            href="#"
+            data-modal-target="waitlist-modal"
+            class="cta-button w-full sm:w-auto inline-block px-12 py-4 bg-banana-yellow text-gray-900 text-xl font-extrabold rounded-full soft-shadow hover:bg-yellow-400 transform hover:scale-[1.02] transition duration-300"
+          >
+            Join the Waitlist
+          </a>
+          <p class="text-sm mt-4 text-white/70 font-semibold">
+            Founding Pricing never increases — ever.
           </p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Final CTA -->
-    <section class="cta">
-      <div class="container">
-        <h2 class="section-title">Ready to Start 2026 Organised?</h2>
-        <p>
-          Join hundreds of UK families preparing for a stress-free year of meal
-          planning.
-        </p>
+      <!-- 6. “HOW IT WORKS” WALKTHROUGH -->
+      <section id="how-it-works" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+          <h2
+            class="title-font text-4xl md:text-5xl font-extrabold text-center mb-16 text-gray-800"
+          >
+            See how it works.
+          </h2>
 
-        <form
-          name="waitlist-footer"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          class="email-form"
+          <div class="relative space-y-16">
+            <!-- Step 1 -->
+            <div class="md:flex md:space-x-12 items-center">
+              <div class="flex-1 md:w-1/2">
+                <div class="flex items-center space-x-4 mb-4">
+                  <span
+                    class="title-font text-4xl font-extrabold text-strawberry-red"
+                    >1</span
+                  >
+                  <h3 class="title-font text-3xl font-extrabold text-gray-800">
+                    Save your favourite recipes
+                  </h3>
+                </div>
+                <p class="text-lg text-gray-600">
+                  From bloggers, websites, or Instagram reels — Preptable
+                  captures them beautifully. Stop losing recipes into the void
+                  of saved posts.
+                </p>
+              </div>
+              <div class="flex-1 md:w-1/2 mt-8 md:mt-0 flex justify-center">
+                <!-- Visual Placeholder: Saved Recipes List -->
+                <div
+                  class="w-64 p-4 bg-white rounded-3xl soft-shadow border-2 border-strawberry-red/50"
+                >
+                  <div class="font-bold mb-2 text-gray-800">
+                    My Saved Recipes
+                  </div>
+                  <div
+                    class="h-2 bg-strawberry-red/70 rounded-full w-5/6 mb-3"
+                  ></div>
+                  <div
+                    class="h-2 bg-strawberry-red/70 rounded-full w-4/5 mb-3"
+                  ></div>
+                  <div
+                    class="h-2 bg-strawberry-red/70 rounded-full w-2/3 mb-3"
+                  ></div>
+                  <div
+                    class="h-2 bg-strawberry-red/70 rounded-full w-3/4"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vertical Line Separator (REMOVED: was hidden md:block absolute left-1/2 top-16 bottom-16 w-1 bg-gray-200 -z-0) -->
+
+            <!-- Step 2 -->
+            <div class="md:flex md:space-x-12 items-center">
+              <div class="flex-1 md:w-1/2 order-2">
+                <div
+                  class="flex items-center space-x-4 mb-4 justify-start md:justify-end"
+                >
+                  <span
+                    class="title-font text-4xl font-extrabold text-blueberry-blue"
+                    >2</span
+                  >
+                  <h3 class="title-font text-3xl font-extrabold text-gray-800">
+                    Plan your meals
+                  </h3>
+                </div>
+                <p class="text-lg text-gray-600 text-left md:text-right">
+                  Drag, drop, and adjust your week in seconds. No spreadsheets.
+                  No mental maths. Just a calm plan for the week ahead.
+                </p>
+              </div>
+              <div
+                class="flex-1 md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-start order-1"
+              >
+                <!-- Visual Placeholder: Calendar/Grid -->
+                <div
+                  class="w-full max-w-sm p-4 bg-white rounded-3xl soft-shadow border-2 border-blueberry-blue/50"
+                >
+                  <div class="font-bold mb-3 text-gray-800">
+                    Weekly Calendar View
+                  </div>
+                  <div
+                    class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-gray-500 mb-1"
+                  >
+                    <span>M</span><span>T</span><span>W</span><span>T</span
+                    ><span>F</span><span>S</span><span>S</span>
+                  </div>
+                  <div class="grid grid-cols-7 gap-1">
+                    <div
+                      class="h-8 bg-blueberry-blue/50 rounded-lg col-span-2"
+                    ></div>
+                    <div class="h-8 bg-garden-green/50 rounded-lg"></div>
+                    <div
+                      class="h-8 bg-strawberry-red/50 rounded-lg col-span-2"
+                    ></div>
+                    <div
+                      class="h-8 bg-blueberry-blue/50 rounded-lg col-span-2"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="md:flex md:space-x-12 items-center">
+              <div class="flex-1 md:w-1/2">
+                <div class="flex items-center space-x-4 mb-4">
+                  <span
+                    class="title-font text-4xl font-extrabold text-garden-green"
+                    >3</span
+                  >
+                  <h3 class="title-font text-3xl font-extrabold text-gray-800">
+                    Shop with zero stress
+                  </h3>
+                </div>
+                <p class="text-lg text-gray-600">
+                  Your shopping list is automatically built, organised by aisle
+                  category, and easily printable or shareable.
+                </p>
+              </div>
+              <div class="flex-1 md:w-1/2 mt-8 md:mt-0 flex justify-center">
+                <!-- Visual Placeholder: Shopping List -->
+                <div
+                  class="w-64 p-6 bg-white rounded-3xl soft-shadow border-2 border-garden-green/50"
+                >
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="font-bold text-lg text-gray-800">
+                      Shopping List
+                    </div>
+                    <span
+                      class="text-xs px-2 py-1 bg-garden-green text-white rounded-full"
+                      >34 Items</span
+                    >
+                  </div>
+                  <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="font-semibold text-garden-green">Produce:</li>
+                    <li class="flex justify-between">
+                      Tomatoes
+                      <span class="text-xs bg-gray-100 px-2 rounded">2kg</span>
+                    </li>
+                    <li class="flex justify-between">
+                      Onions
+                      <span class="text-xs bg-gray-100 px-2 rounded">3</span>
+                    </li>
+                    <li class="font-semibold text-blueberry-blue mt-4">
+                      Dairy:
+                    </li>
+                    <li class="flex justify-between">
+                      Milk
+                      <span class="text-xs bg-gray-100 px-2 rounded">1L</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. TESTIMONIALS / COMMUNITY SECTION -->
+      <section class="py-20 bg-banana-yellow/30">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+          <h2
+            class="title-font text-4xl md:text-5xl font-extrabold mb-12 text-gray-800"
+          >
+            Families are already excited.
+          </h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Quote 1 -->
+            <div
+              class="p-8 bg-white rounded-3xl soft-shadow flex flex-col items-center"
+            >
+              <div
+                class="w-12 h-12 bg-strawberry-red rounded-full mb-4 flex items-center justify-center text-white font-bold text-xl"
+              >
+                A
+              </div>
+              <p class="italic text-lg text-gray-700 mb-4">
+                “I’ve been waiting for an app like this. Meal planning is about
+                to get so much easier.”
+              </p>
+              <p class="font-semibold text-sm text-gray-500">
+                — Happy Parent, London
+              </p>
+            </div>
+
+            <!-- Quote 2 -->
+            <div
+              class="p-8 bg-white rounded-3xl soft-shadow flex flex-col items-center"
+            >
+              <div
+                class="w-12 h-12 bg-blueberry-blue rounded-full mb-4 flex items-center justify-center text-white font-bold text-xl"
+              >
+                B
+              </div>
+              <p class="italic text-lg text-gray-700 mb-4">
+                “Finally a way to save all my Instagram recipes in one place!”
+              </p>
+              <p class="font-semibold text-sm text-gray-500">
+                — Stressed Scroller, Manchester
+              </p>
+            </div>
+
+            <!-- Quote 3 -->
+            <div
+              class="p-8 bg-white rounded-3xl soft-shadow flex flex-col items-center"
+            >
+              <div
+                class="w-12 h-12 bg-garden-green rounded-full mb-4 flex items-center justify-center text-white font-bold text-xl"
+              >
+                C
+              </div>
+              <p class="italic text-lg text-gray-700 mb-4">
+                “This will save so much time. Take my money already.”
+              </p>
+              <p class="font-semibold text-sm text-gray-500">
+                — Time-Strapped Mum, Glasgow
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. ABOUT THE FOUNDER SECTION -->
+      <section id="founders" class="py-20 bg-white">
+        <div
+          class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center md:space-x-12"
         >
-          <input type="hidden" name="form-name" value="waitlist-footer" />
-          <p style="display: none">
-            <label
-              >Don't fill this out if you're human: <input name="bot-field"
-            /></label>
-          </p>
-          <!-- Name Field -->
-          <div class="form-group">
-            <input
-              type="text"
-              name="name"
-              class="email-input"
-              placeholder="Your name"
-              required
+          <!-- Founder Photo/Avatar -->
+          <div class="md:w-1/3 flex-shrink-0 mb-8 md:mb-0">
+            <!-- Placeholder Founder Photo (Use a friendly, warm style) -->
+            <img
+              src="https://placehold.co/300x300/85E3FF/1a202c?text=Founder+Photo"
+              alt="Preptable Founder"
+              class="w-52 h-52 object-cover rounded-full mx-auto soft-shadow border-8 border-blueberry-blue/50"
             />
           </div>
 
-          <!-- Email Field -->
-          <div class="form-group">
-            <input
-              type="email"
-              name="email"
-              class="email-input"
-              placeholder="Enter your email"
-              required
-            />
-            <button type="submit" class="submit-btn">Join Waitlist</button>
-          </div>
-          <div class="founding-badge">
-            🎉 Founding Member Pricing: £3.99/month forever (First 100 only)
-          </div>
-        </form>
-
-        <div class="stats">
-          <div class="stat-item">
-            <span class="stat-number">£800</span>
-            <span class="stat-label">Saved per family yearly</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">2 min</span>
-            <span class="stat-label">To plan your week</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">Jan 5</span>
-            <span class="stat-label">2026 Launch</span>
+          <!-- Founder Story -->
+          <div class="md:w-2/3">
+            <h2
+              class="title-font text-4xl font-extrabold mb-6 text-gray-800 md:text-left text-center"
+            >
+              Made by a parent who knows the chaos.
+            </h2>
+            <p class="text-lg mb-4 text-gray-600">
+              I created Preptable after years of juggling recipe screenshots,
+              lost notes, half-finished shopping lists, and kids asking what’s
+              for dinner. I wanted a calmer way to cook for my family — and it
+              turns out thousands of parents felt the same.
+            </p>
+            <p
+              class="text-lg text-gray-600 font-semibold border-l-4 border-strawberry-red pl-4 py-1"
+            >
+              Preptable is built with love, practicality, and the belief that
+              food should bring families together, not stress them out.
+            </p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="social-links">
+      <!-- 9. FINAL CTA SECTION -->
+      <section class="py-20 bg-garden-green/80">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+          <h2
+            class="title-font text-5xl md:text-6xl font-extrabold mb-6 text-white"
+          >
+            Ready to plan a calmer week?
+          </h2>
+          <p class="text-xl md:text-2xl mb-10 text-white/90 font-medium">
+            Join Preptable’s early community and be one of the first to
+            experience meal planning without the mental load.
+          </p>
+          <!-- Updated CTA to trigger the modal via data attribute -->
+          <a
+            href="#"
+            data-modal-target="waitlist-modal"
+            class="cta-button inline-block px-12 py-4 bg-strawberry-red text-white text-xl font-extrabold rounded-full soft-shadow hover:bg-red-600 transform hover:scale-[1.02] transition duration-300"
+          >
+            Join the Waitlist — Get Founding Pricing
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- 10. FOOTER -->
+    <footer class="bg-gray-900 py-12">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <!-- Logo/Brand -->
+        <div class="flex justify-center items-center space-x-2 mb-6">
+          <svg
+            class="w-8 h-8 text-garden-green"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 15v-4H8l4.5-8V7h3l-4.5 8v2h-2z"
+            />
+          </svg>
+          <span class="title-font text-2xl font-bold text-white"
+            >Preptable</span
+          >
+        </div>
+
+        <!-- Social Icons (NEW BLOCK) -->
+
+        <div class="flex justify-center space-x-6 text-gray-400 mb-8">
           <a
             href="https://instagram.com/preptableapp"
             class="social-link"
@@ -335,51 +925,145 @@
             rel="noopener"
             ><i class="fa-brands fa-x-twitter"></i
           ></a>
+          <a href="#" class="social-link" target="_blank" rel="noopener"
+            ><i class="fa-brands fa-x-facebook"></i
+          ></a>
         </div>
-        <p>hello@preptable.app</p>
-        <p class="footer-text">
-          Made in St. Albans, UK <br />
-          <!-- <span>by a French founder 🇫🇷</span> -->
+        <!-- Links -->
+        <nav
+          class="flex justify-center space-x-6 text-gray-400 font-semibold mb-6"
+        >
+          <a href="#" class="hover:text-white transition">Home</a>
+          <a href="#how-it-works" class="hover:text-white transition"
+            >How It Works</a
+          >
+          <a href="#founders" class="hover:text-white transition">About</a>
+          <a href="#" class="hover:text-white transition">Privacy</a>
+          <a href="#" class="hover:text-white transition">Terms</a>
+        </nav>
+
+        <!-- Micro Copy -->
+        <p class="text-sm text-gray-500">
+          &copy; 2024 Preptable. Made with love for families everywhere.
         </p>
-        <p class="footer-text">© 2025 Preptable. All rights reserved.</p>
       </div>
     </footer>
 
-    <script>
-      // Countdown Timer
-      function updateCountdown() {
-        const launchDate = new Date("2026-01-05T09:30:00").getTime();
-        const now = new Date().getTime();
-        const distance = launchDate - now;
+    <!-- WAITLIST POPUP/MODAL -->
+    <div
+      id="waitlist-modal"
+      class="modal fixed inset-0 z-[100] flex items-center justify-center p-4"
+    >
+      <!-- Backdrop -->
+      <div
+        class="modal-backdrop absolute inset-0 bg-gray-900/70 backdrop-blur-sm"
+      ></div>
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      <!-- Modal Content -->
+      <div
+        class="modal-content relative w-full max-w-lg p-6 sm:p-10 bg-white rounded-3xl soft-shadow border-t-8 border-blueberry-blue mx-auto"
+      >
+        <!-- Close Button -->
+        <button
+          class="close-modal absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
 
-        document.getElementById("days").textContent = days;
-        document.getElementById("hours").textContent = hours;
-        document.getElementById("minutes").textContent = minutes;
+        <!-- Title & Description -->
+        <header class="text-center mb-6">
+          <h2
+            class="title-font text-3xl sm:text-4xl font-extrabold mb-2 text-gray-800"
+          >
+            Join the Preptable Family!
+          </h2>
+          <p class="text-gray-600">
+            Sign up below to lock in your Founding Member pricing and get
+            notified the moment we launch early access.
+          </p>
+        </header>
 
-        if (distance < 0) {
-          document.getElementById("countdown").innerHTML =
-            "<h2>🎉 We're Live! 🎉</h2>";
-        }
-      }
+        <!-- Waitlist Form -->
+        <form
+          id="waitlist-form-popup"
+          class="space-y-4"
+          name="waitlist"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+        >
+          <div>
+            <label for="name" class="block text-sm font-bold text-gray-700 mb-1"
+              >Your Name</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="Your Name"
+              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blueberry-blue focus:ring-1 focus:ring-blueberry-blue transition soft-shadow"
+              aria-required="true"
+            />
+          </div>
 
-      updateCountdown();
-      setInterval(updateCountdown, 60000); // Update every minute
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-bold text-gray-700 mb-1"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="Enter your email"
+              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blueberry-blue focus:ring-1 focus:ring-blueberry-blue transition soft-shadow"
+              aria-required="true"
+            />
+          </div>
 
-      // Form submission handling
-      const form = document.getElementById("waitlist-form");
-      form.addEventListener("submit", function (e) {
-        // Netlify handles the actual submission
-        // Just show success message
-        setTimeout(() => {
-          document.getElementById("success-message").style.display = "block";
-        }, 100);
-      });
-    </script>
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="cta-button w-full px-6 py-3 mt-4 bg-strawberry-red text-white text-lg font-extrabold rounded-xl soft-shadow hover:bg-red-500"
+          >
+            Join waitlist
+          </button>
+        </form>
+
+        <!-- Success Message (Initially Hidden) -->
+        <div
+          id="waitlist-success"
+          class="hidden text-center p-6 bg-garden-green/10 rounded-xl mt-6 border-l-4 border-garden-green"
+        >
+          <h3 class="title-font text-2xl font-bold text-garden-green mb-2">
+            Success! 🎉
+          </h3>
+          <p class="text-gray-700">
+            You're officially on the waitlist. We'll be in touch soon with your
+            early access invite!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="./scripts.js"></script>
   </body>
 </html>
+
+
