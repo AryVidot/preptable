@@ -85,3 +85,27 @@
       }
     });
   });
+
+//   Netlify script
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  
+  // Get form data
+  const formData = new FormData(form);
+  
+  // Submit to Netlify
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString()
+  })
+  .then(() => {
+    // Show success message
+    form.style.display = "none";
+    successMessage.style.display = "block";
+  })
+  .catch((error) => {
+    console.error("Form submission error:", error);
+    alert("There was an error submitting the form. Please try again.");
+  });
+});
