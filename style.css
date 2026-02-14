@@ -1,5 +1,11 @@
 /* Fonts from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Manrope:wght@200..800&display=swap');
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -8,6 +14,7 @@ body {
   font-family: "Manrope", sans-serif;
   color: #1a202c; /* Dark text for readability */
 }
+
 .title-font {
   font-family: "Chelsea Market", cursive, sans-serif;
   line-height: 1.2;
@@ -89,13 +96,15 @@ body {
 
 /* Custom styles for smooth slide-in transition from the right */
 .mobile-menu {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, visibility 0.3s;;
   /* Start off-screen to the right */
   transform: translateX(100%);
+  visibility: hidden; /* Prevents interaction and "ghosting" when closed */
 }
 .mobile-menu.active {
   /* Slide into view */
   transform: translateX(0);
+  visibility: visible;
 }
 /* Style for the very rounded feature cards */
 .feature-card {

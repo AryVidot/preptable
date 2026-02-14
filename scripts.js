@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuIconClosed.classList.toggle("hidden", isActive);
     menuIconOpen.classList.toggle("hidden", !isActive);
     menuOverlay.classList.toggle("hidden", !isActive);
-    document.body.style.overflow = isActive ? "hidden" : "auto";
+    document.body.style.overflow = isActive ? "hidden" : "";
   };
 
   menuButton.addEventListener("click", (event) => {
